@@ -6,10 +6,23 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
 export default function LoginScreen() {
   const [studentNumber, setStudentNumber] = useState("");
   const [password, setPassword] = useState("");
+
+  // function to simulate sign up
+  const handleSignUp = () => {
+    auth; // here I added the @email.com to be added to the student number
+    createUserWithEmailAndPassword(auth, studentNumber + "@email.com", password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user.email); //printed 1234@email.com //on the firebase console I can see the user created
+      })
+      .catch((error) => alert(error.message));
+  };
 
   return (
     <View style={styles.container}>
@@ -36,7 +49,7 @@ export default function LoginScreen() {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {} /*handleSignUp*/}
+          onPress={handleSignUp} //calling the function
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
