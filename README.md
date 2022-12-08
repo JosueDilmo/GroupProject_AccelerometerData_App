@@ -60,4 +60,6 @@ where,
 [Expo Documentation Firebase](https://docs.expo.dev/guides/using-firebase/)<br>
 [React Navigation](https://reactnavigation.org/docs/getting-started)<br>
 [Firebase Web Documentation](https://firebase.google.com/docs/auth/web/start)<br>
+[Firestore Web Documentation](https://firebase.google.com/docs/firestore/quickstart)<br>
 [React Native Auth](https://youtu.be/ql4J6SpLXZA)<br>
+[Firebase Firestore](https://youtu.be/eET0YtDBWWg)<br>
