@@ -5,24 +5,52 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 export default function LoginScreen() {
+  //sign up and login variables
   const [studentNumber, setStudentNumber] = useState("");
   const [password, setPassword] = useState("");
+  const plusEmail = "@email.com";
 
-  // function to simulate sign up
+  //navigation variable
+  const navigation = useNavigation();
+
+  // function to sign up
   const handleSignUp = () => {
-    auth; // here I added the @email.com to be added to the student number
-    createUserWithEmailAndPassword(auth, studentNumber + "@email.com", password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user.email); //printed 1234@email.com //on the firebase console I can see the user created
-      })
-      .catch((error) => alert(error.message));
+    auth;
+    // here the @email.com will be added to the student number (register with student number only)
+    createUserWithEmailAndPassword(
+      auth,
+      studentNumber + plusEmail,
+      password
+    ).catch((error) => alert(error.message));
   };
+
+  // function to log in
+  const handleLogin = () => {
+    auth;
+    signInWithEmailAndPassword(auth, studentNumber + plusEmail, password).catch(
+      (error) => alert(error.message)
+    );
+  };
+
+  // if user is logged in, redirect to home screen
+  // if user registers, redirect to home screen
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigation.dispatch(StackActions.replace("Home")); // redirect to home screen and clear stack
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -31,19 +59,19 @@ export default function LoginScreen() {
           placeholder="Student Number"
           style={styles.input}
           value={studentNumber}
-          onChangeText={(text) => setStudentNumber(text)}
+          onChangeText={(text) => setStudentNumber(text)} //setting the value of the student number
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           secureTextEntry
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(text) => setPassword(text)} //setting the value of the password
         />
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => {} /*handleLogin*/}
+          onPress={handleLogin} //calling the function
           style={styles.button}
         >
           <Text style={styles.buttonText}>Login</Text>
