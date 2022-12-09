@@ -31,6 +31,12 @@ export default function LoginScreen() {
       studentNumber + plusEmail,
       password
     ).catch((error) => alert(error.message));
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigation.dispatch(StackActions.replace("Home", { studentNumber })); // redirect to home screen and clear stack
+      }
+      return unsubscribe;
+    });
   };
 
   // function to log in
@@ -39,18 +45,24 @@ export default function LoginScreen() {
     signInWithEmailAndPassword(auth, studentNumber + plusEmail, password).catch(
       (error) => alert(error.message)
     );
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigation.dispatch(StackActions.replace("Home", { studentNumber })); // redirect to home screen and clear stack
+      }
+      return unsubscribe;
+    });
   };
 
   // if user is logged in, redirect to home screen
   // if user registers, redirect to home screen
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.dispatch(StackActions.replace("Home")); // redirect to home screen and clear stack
-      }
-    });
-    return unsubscribe;
-  }, []);
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       navigation.dispatch(StackActions.push("Home")); // redirect to home screen and clear stack
+  //     }
+  //   });
+  //   return unsubscribe;
+  // }, []);
 
   return (
     <View style={styles.container}>

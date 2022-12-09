@@ -18,7 +18,7 @@ The objective of this project is to develop a cloud connected mobile app to coll
 - <b>Authenticate using Firebase\*, upload data to Firestore</b><br>
 
   - [x] Sign up using StudentID (as username) and a password.<br>
-  - [ ] After sign up, collect and update details such as name, course, year in Firestore > <i>StudentID</i>, allow editing these details later.<br>
+  - [x] After sign up, collect and update details such as name, course, year in Firestore > <i>StudentID</i>, allow editing these details later.<br>
   - [ ] Collect and store locally 1000 accelerometer data points.<br>
   - [ ] Once 1000 data points are collected, upload to Firestore > <i>StudentID</i> > accelerometer_data<br>
   - [ ] Repeat 3 and 4 as long as the app is open and is in the foreground (Don't record when minimised)<br>
@@ -59,7 +59,6 @@ where,
 
 [Expo Documentation Firebase](https://docs.expo.dev/guides/using-firebase/)<br>
 [React Navigation](https://reactnavigation.org/docs/getting-started)<br>
-[Firebase Web Documentation](https://firebase.google.com/docs/auth/web/start)<br>
+[Firebase Auth Documentation](https://firebase.google.com/docs/auth/web/start)<br>
 [Firestore Web Documentation](https://firebase.google.com/docs/firestore/quickstart)<br>
 [React Native Auth](https://youtu.be/ql4J6SpLXZA)<br>
-[Firebase Firestore](https://youtu.be/eET0YtDBWWg)<br>
