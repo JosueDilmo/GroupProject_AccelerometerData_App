@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { Component } from "react";
+import React from "react";
 
 export default function DetailsScreen(props: {
   route: { params: { userDetail: any } };
@@ -9,6 +9,9 @@ export default function DetailsScreen(props: {
   return (
     <View style={styles.container}>
       <View style={styles.internalContainer}>
+        <Text style={styles.title}>
+          Student Number: <Text style={styles.text}>{userDetail.id}</Text>
+        </Text>
         <Text style={styles.title}>
           Student Name: <Text style={styles.text}>{userDetail.name}</Text>
         </Text>

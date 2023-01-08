@@ -52,10 +52,10 @@ export default function HomeScreen(props: any) {
         y: accelerometerMeasurement.y,
         z: accelerometerMeasurement.z,
       });
-      console.log(accelerometerDataArray.length);
+      //console.log(accelerometerDataArray.length);
 
       // Upload accelerometer data to Firestore every 1000 data points
-      if (accelerometerDataArray.length === 50) {
+      if (accelerometerDataArray.length === 1000) {
         uploadAccelerometerData();
         accelerometerDataArray.length = 0;
         console.log("uploadAccelerometerData called");

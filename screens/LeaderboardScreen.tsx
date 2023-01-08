@@ -37,28 +37,31 @@ export default function LeaderBoardScreen(props: any) {
       ...doc.data(),
       id: doc.id,
     }));
-    setStudents(students);
     // Map through all users and get all accelerometer data
     const allUserAcceData = students.map((doc) => doc.accelerometer_data);
+    setStudents(students);
     setUsersAcceData(allUserAcceData);
   };
 
-  // Loop through all accelerometer data and calculate score
-  usersAcceData.forEach((userData: any) => {
-    let score = 0;
-    if ((userData.length = 50)) {
-      userData.forEach((dataArray: { x: number; y: number; z: number }) => {
-        score += calculateScore(dataArray);
-      });
-      score = score / 1000;
-      students[user].score = score;
-      user++;
-    } else {
-      students[user].score = -1;
-      user++;
-    }
-    rankByScore(students);
-  });
+  const displayScore = (allUserAcceData: any[]) => {
+    // Loop through all accelerometer data and calculate score
+    allUserAcceData.forEach((userData: any) => {
+      let score = 0;
+      if (userData === undefined) {
+        students[user].score = -1;
+        user++;
+      } else {
+        userData.forEach((dataArray: { x: number; y: number; z: number }) => {
+          score += calculateScore(dataArray);
+        });
+        score = score / 1000;
+        students[user].score = score;
+        user++;
+      }
+      rankByScore(students);
+    });
+  };
+  displayScore(usersAcceData);
 
   // To calculate score
   function calculateScore(object: { x: number; y: number; z: number }) {
