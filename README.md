@@ -55,6 +55,20 @@ where,
 
 \*\*\*Feel free to use your own function or an external open source library to convert timestamp to time ago format
 
+## Report
+
+This project was a bit easier than the first one mostly because developed the first project in React Native (and that project was much bigger than this one) and because I had used Firebase/Firestore Cloud in my final project last year. After watching few videos about some basic Firebase/Firestore for Web things and reading the documentations (all in the reference section) wasn’t too hard to understand what to do. Still, I couldn’t fulfil all the requirements and still some changes to be done.<br>
+
+First, I could not connect to the shared Firestore Database, I tried few times but got some errors about <i>unidentified objects</i>, so my option was to stick with my Firestore which is configured the same as the requirements.<br>
+
+Second, in the requirements <i>Display Leaderboard</i> it is missing the refresh every minute function (and the display last refreshed) and I’m a bit concerned with the retrieve of accelerometer data and the display of the calculated scores. In the requirements there is no information about how it should be store, so I used the same Array which contain all the data from the collection Users, and I added the score according to their position in the array.<br>
+
+The accelerometer sensors are running when the application is opened and keep running until it is closed/ minimized. The library <i>Expo Sensors</i> (available in the reference) made the usage and capture of the data simple and fast.<br>
+
+Although simple, this project was a real challenge and being able of using tools available in a normal development environment such as Firebase authentication and Firestore database made this project worth of spending few nights awake and the knowledge it added will be always precious.<br>
+
+In the reference section is the videos and documentation I used for this project and all the code seen is referenced.
+
 ## Reference
 
 [Expo Documentation Firebase](https://docs.expo.dev/guides/using-firebase/)<br>
@@ -63,3 +77,4 @@ where,
 [Firebase Auth Documentation](https://firebase.google.com/docs/auth/web/start)<br>
 [Firestore Web Documentation](https://firebase.google.com/docs/firestore/quickstart)<br>
 [React Native Auth](https://youtu.be/ql4J6SpLXZA)<br>
+[Stack Overflow](https://stackoverflow.com/)
