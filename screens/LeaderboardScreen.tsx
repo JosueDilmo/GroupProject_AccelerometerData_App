@@ -83,15 +83,19 @@ export default function LeaderBoardScreen(props: any) {
       <FlatList
         data={students}
         renderItem={({ item }) => (
-          <View
-            style={styles.internalContainer}
-            onTouchEnd={() => navigation.navigate("Details", item)}
-          >
-            <Text style={styles.text}>{students.indexOf(item) + 1}</Text>
-            <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>
-              {item.score == -1 ? NaN : item.score}
-            </Text>
+          <View>
+            <TouchableOpacity
+              style={styles.internalContainer}
+              onPress={() =>
+                navigation.navigate("Details", { userDetail: item })
+              }
+            >
+              <Text style={styles.text}>{students.indexOf(item) + 1}</Text>
+              <Text style={styles.text}>{item.name}</Text>
+              <Text style={styles.text}>
+                {item.score == -1 ? NaN : item.score}
+              </Text>
+            </TouchableOpacity>
           </View>
         )}
       ></FlatList>
@@ -134,9 +138,9 @@ const styles = StyleSheet.create({
   internalContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
+    alignSelf: "flex-start",
     backgroundColor: "white",
     padding: 8,
-    alignSelf: "flex-start",
     marginTop: "0.5%",
     borderColor: "#0782f9",
     borderWidth: 1,
