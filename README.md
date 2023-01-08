@@ -2,14 +2,14 @@
 
 <br>
 
-## Individual Project
+## Group Project
 
 - Lecture Name: [Saravanabalagi Ramachandran](https://github.com/saravanabalagi)
 - Students Name: `Josue Santos`
 - Student Number: `24061`
   <br><br>
 
-## Map places in Ireland <br>
+## Accelerometer Data App <br>
 
 ### Description <br>
 
@@ -19,15 +19,15 @@ The objective of this project is to develop a cloud connected mobile app to coll
 
   - [x] Sign up using StudentID (as username) and a password.<br>
   - [x] After sign up, collect and update details such as name, course, year in Firestore > <i>StudentID</i>, allow editing these details later.<br>
-  - [ ] Collect and store locally 1000 accelerometer data points.<br>
-  - [ ] Once 1000 data points are collected, upload to Firestore > <i>StudentID</i> > accelerometer_data<br>
-  - [ ] Repeat 3 and 4 as long as the app is open and is in the foreground (Don't record when minimised)<br>
+  - [x] Collect and store locally 1000 accelerometer data points.<br>
+  - [x] Once 1000 data points are collected, upload to Firestore > <i>StudentID</i> > accelerometer_data<br>
+  - [x] Repeat 3 and 4 as long as the app is open and is in the foreground (Don't record when minimised)<br>
 
 - <b>Display Leaderboard<br></b>
 
-  - [ ] Retrieve accelerometer_data of all users and calculate movement score\*\* for each user<br>
-  - [ ] If accelerometer_data is unavailable or not in correct format or has more than 1000 data points, show score "N/A".<br>
-  - [ ] Show recycler view to display leaderboard with columns rank, name and score (use score for ranking)<br>
+  - [x] Retrieve accelerometer_data of all users and calculate movement score\*\* for each user<br>
+  - [x] If accelerometer_data is unavailable or not in correct format or has more than 1000 data points, show score "N/A".<br>
+  - [x] Show recycler view to display leaderboard with columns rank, name and score (use score for ranking)<br>
   - [ ] Refresh every minute, show information: last refreshed (in time ago format\*\*\*), and refreshing in x seconds<br>
   - [ ] Show details of user when clicked in full screen, allow going back to leaderboard<br>
 
@@ -58,6 +58,7 @@ where,
 ## Reference
 
 [Expo Documentation Firebase](https://docs.expo.dev/guides/using-firebase/)<br>
+[Expo Sensors Documentation](https://docs.expo.dev/versions/latest/sdk/accelerometer/)<br>
 [React Navigation](https://reactnavigation.org/docs/getting-started)<br>
 [Firebase Auth Documentation](https://firebase.google.com/docs/auth/web/start)<br>
 [Firestore Web Documentation](https://firebase.google.com/docs/firestore/quickstart)<br>

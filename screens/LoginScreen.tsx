@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -13,19 +13,19 @@ import {
 import { auth } from "../firebaseConfig";
 import { StackActions, useNavigation } from "@react-navigation/native";
 
+// Login and Register screen
 export default function LoginScreen() {
-  //sign up and login variables
+  // User information variables
   const [studentNumber, setStudentNumber] = useState("");
   const [password, setPassword] = useState("");
-  const plusEmail = "@email.com";
-
-  //navigation variable
+  // @student.dorset-college.ie will be added to the student number (register with student number only)
+  const plusEmail = "@student.dorset-college.ie";
+  // Navigation variable
   const navigation = useNavigation();
 
-  // function to sign up
+  // Function to sign up
   const handleSignUp = () => {
     auth;
-    // here the @email.com will be added to the student number (register with student number only)
     createUserWithEmailAndPassword(
       auth,
       studentNumber + plusEmail,
@@ -33,13 +33,13 @@ export default function LoginScreen() {
     ).catch((error) => alert(error.message));
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigation.dispatch(StackActions.replace("Home", { studentNumber })); // redirect to home screen and clear stack
+        navigation.dispatch(StackActions.replace("Home", { studentNumber })); // Redirect to Home screen and clear stack
       }
       return unsubscribe;
     });
   };
 
-  // function to log in
+  // Function to log in
   const handleLogin = () => {
     auth;
     signInWithEmailAndPassword(auth, studentNumber + plusEmail, password).catch(
@@ -47,22 +47,11 @@ export default function LoginScreen() {
     );
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigation.dispatch(StackActions.replace("Home", { studentNumber })); // redirect to home screen and clear stack
+        navigation.dispatch(StackActions.replace("Home", { studentNumber })); // Redirect to Home screen and clear stack
       }
       return unsubscribe;
     });
   };
-
-  // if user is logged in, redirect to home screen
-  // if user registers, redirect to home screen
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       navigation.dispatch(StackActions.push("Home")); // redirect to home screen and clear stack
-  //     }
-  //   });
-  //   return unsubscribe;
-  // }, []);
 
   return (
     <View style={styles.container}>
@@ -71,25 +60,25 @@ export default function LoginScreen() {
           placeholder="Student Number"
           style={styles.input}
           value={studentNumber}
-          onChangeText={(text) => setStudentNumber(text)} //setting the value of the student number
+          onChangeText={(text) => setStudentNumber(text)} // Set student number
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           secureTextEntry
           value={password}
-          onChangeText={(text) => setPassword(text)} //setting the value of the password
+          onChangeText={(text) => setPassword(text)} // Set password
         />
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={handleLogin} //calling the function
+          onPress={handleLogin} // Handle login function
           style={styles.button}
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleSignUp} //calling the function
+          onPress={handleSignUp} // Handle sign up function
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>

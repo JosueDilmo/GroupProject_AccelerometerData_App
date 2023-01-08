@@ -4,67 +4,75 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  Button,
 } from "react-native";
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { firestore } from "../firebaseConfig";
 import { StackActions, useNavigation } from "@react-navigation/native";
 
 export default function SettingsScreen(props: any) {
-  const studentNumber = props.route.params.studentNumber; //getting student number from home screen
-  const [name, setName] = useState(""); //state variables
-  const [course, setCourse] = useState(""); //state variables
-  const [year, setYear] = useState(""); //state variables
-  const [accelerometer_data, setAccelerometer_data] = useState(""); //state variables
-  const navigation = useNavigation(); //navigation variable
-
-  const studentDoc = doc(firestore, "Firestore", studentNumber); // setting document
+  // Navigation variable
+  const navigation = useNavigation();
+  // Student information variables
+  const [name, setName] = useState();
+  const [course, setCourse] = useState();
+  const [year, setYear] = useState();
+  // Getting student number from home screen
+  const studentNumber = props.route.params.studentNumber;
+  // Setting the doc/data structure to read from Firestore
+  const studentDoc = doc(firestore, "Users", studentNumber);
+  // Setting data structure to update/upload to Firestore
   const studentData = {
     name: name,
     course: course,
     year: year,
-    accelerometer_data: accelerometer_data,
-  }; // setting data to update
+  };
 
-  // function to update student details to firestore
+  // Function to update/upload student details to Firestore
   const handleUpdateDetails = () => {
+    // Checking if all fields are filled
     if (name == "" || course == "" || year == "") {
-      alert("Please fill in all fields"); //checking if all fields are filled
+      alert("Please fill in all fields");
     } else {
-      setDoc(studentDoc, studentData, { merge: true }); //updating data if all fields are filled
-      navigation.dispatch(StackActions.replace("Home", { studentNumber })); // redirect to home screen and clear stack
+      // Update data if all fields are filled
+      setDoc(studentDoc, studentData, { merge: true });
+      // Redirect to Home screen and clear stack
+      navigation.dispatch(StackActions.replace("Home", { studentNumber }));
     }
   };
 
   return (
-    <View style={styles.detailsContainer}>
-      <Text>Please, update your details:</Text>
-      <TextInput
-        placeholder="Name"
-        style={styles.textInput}
-        onChangeText={(text) => setName(text)}
-      />
-      <TextInput
-        placeholder="Course"
-        style={styles.textInput}
-        onChangeText={(text) => setCourse(text)}
-      />
-      <TextInput
-        placeholder="Year"
-        style={styles.textInput}
-        onChangeText={(text) => setYear(text)}
-      />
-      <Text>Your Data: {accelerometer_data}</Text>
+    <View style={styles.container}>
+      <View style={styles.internalContainer}>
+        <Text style={styles.title}>Please, update your details.</Text>
+        <TextInput
+          placeholder="Name"
+          style={styles.textInput}
+          onChangeText={(text) => setName(text)} // Set name state variable
+        />
+        <TextInput
+          placeholder="Course"
+          style={styles.textInput}
+          onChangeText={(text) => setCourse(text)} // Set course state variable
+        />
+        <TextInput
+          placeholder="Year"
+          style={styles.textInput}
+          onChangeText={(text) => setYear(text)} // Set year state variable
+        />
+      </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleUpdateDetails}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleUpdateDetails} // Call handleUpdateDetails function
+        >
           <Text style={styles.buttonText}>Update details</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, styles.buttonOutline]}
           onPress={() =>
             navigation.dispatch(StackActions.replace("Home", { studentNumber }))
-          }
+          } // Redirect to Home screen and clear stack
         >
           <Text style={styles.buttonOutlineText}>Back to Home</Text>
         </TouchableOpacity>
@@ -72,12 +80,37 @@ export default function SettingsScreen(props: any) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "black",
+  },
+  internalContainer: {
+    width: "100%",
+    backgroundColor: "white",
+    padding: 16,
+  },
+  title: {
+    color: "black",
+    fontSize: 16,
+    fontWeight: "bold",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+  textInput: {
+    backgroundColor: "white",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 8,
+    marginTop: 8,
+    borderWidth: 1,
+  },
   buttonContainer: {
-    width: "64%",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 24,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    padding: 16,
   },
   button: {
     backgroundColor: "#0782f9",
@@ -94,7 +127,6 @@ const styles = StyleSheet.create({
   },
   buttonOutline: {
     backgroundColor: "white",
-    marginTop: 8,
     borderColor: "#0782f9",
     borderWidth: 2,
   },
@@ -102,21 +134,5 @@ const styles = StyleSheet.create({
     color: "#0782f9",
     fontWeight: "bold",
     fontSize: 16,
-  },
-  textInput: {
-    backgroundColor: "white",
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 8,
-    marginTop: 8,
-    borderWidth: 1,
-  },
-  detailsContainer: {
-    width: "100%",
-    backgroundColor: "white",
-    padding: 16,
-    borderRadius: 8,
-    alignSelf: "center",
-    marginTop: "8%",
   },
 });
